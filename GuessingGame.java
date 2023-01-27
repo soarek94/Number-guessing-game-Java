@@ -1,43 +1,77 @@
-package guessinggame;
-import javax.swing.*;
+// Java program for the above approach
+import java.util.Scanner;
 
-public class GuessingGame {
-    //main method 
-    public static void main(String[] args) {
-        int computerNumber = (int) (Math.random()*100 + 1); //generate random num
-        int userAnswer = 0; //initialize
-        // log correct answer to console for verification
-        System.out.println("The correct guess would be " + computerNumber);
-        int count = 1; //initialize
-        // Display input dialog until the user guesses the correct number 
-        while (userAnswer != computerNumber)
-        {
-            String response = JOptionPane.showInputDialog(null, 
-                "Enter a guess between 1 and 100", "Guessing Game", 3); // display initial input dialog to user
-            userAnswer = Integer.parseInt(response); //convert string to int for use in check method below
-            //pass userAnswer and the Compter gen number along with guess count to method
-            JOptionPane.showMessageDialog(null, ""+ determineGuess(userAnswer, computerNumber, count)); 
-            count++; //increment number of tries for each attempt
-        }  
-    }
-    
-    //Determine guess function to check how close number is to generated number and display try count
-    public static String determineGuess(int userAnswer, int computerNumber, int count){
-        if (userAnswer <=0 || userAnswer >100) {
-            return "Your guess is invalid";
-        }
-        else if (userAnswer == computerNumber ){
-            return "Correct!\nTotal Guesses: " + count;
-        }
-        else if (userAnswer > computerNumber) {
-            return "Your guess is too high, try again.\nTry Number: " + count;
-        }
-        else if (userAnswer < computerNumber) {
-            return "Your guess is too low, try again.\nTry Number: " + count;
-        }
-        else {
-            return "Your guess is incorrect\nTry Number: " + count;
-            
-        }
-    }
+public class GFG {
+
+	// Function that implements the
+	// number guessing game
+	public static void
+	guessingNumberGame()
+	{
+		// Scanner Class
+		Scanner sc = new Scanner(System.in);
+
+		// Generate the numbers
+		int number = 1 + (int)(100
+							* Math.random());
+
+		// Given K trials
+		int K = 5;
+
+		int i, guess;
+
+		System.out.println(
+			"A number is chosen"
+			+ " between 1 to 100."
+			+ "Guess the number"
+			+ " within 5 trials.");
+
+		// Iterate over K Trials
+		for (i = 0; i < K; i++) {
+
+			System.out.println(
+				"Guess the number:");
+
+			// Take input for guessing
+			guess = sc.nextInt();
+
+			// If the number is guessed
+			if (number == guess) {
+				System.out.println(
+					"Congratulations!"
+					+ " You guessed the number.");
+				break;
+			}
+			else if (number > guess
+					&& i != K - 1) {
+				System.out.println(
+					"The number is "
+					+ "greater than " + guess);
+			}
+			else if (number < guess
+					&& i != K - 1) {
+				System.out.println(
+					"The number is"
+					+ " less than " + guess);
+			}
+		}
+
+		if (i == K) {
+			System.out.println(
+				"You have exhausted"
+				+ " K trials.");
+
+			System.out.println(
+				"The number was " + number);
+		}
+	}
+
+	// Driver Code
+	public static void
+	main(String arg[])
+	{
+
+		// Function Call
+		guessingNumberGame();
+	}
 }
